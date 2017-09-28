@@ -3,7 +3,7 @@
 namespace maxcom\catalog\models;
 use yii\helpers\Url;
 
-class Category extends \yii\db\ActiveRecord
+class Category extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\CatalogCategoryInterface
 {
 
 	public static function tableName()
@@ -13,6 +13,10 @@ class Category extends \yii\db\ActiveRecord
 
     public function getId(){
     	return $this->category_id;
+    }
+
+    public function getStatus(){
+        // ...
     }
 
     public function getUrl(){

@@ -4,7 +4,7 @@ namespace maxcom\catalog\models;
 use yii\helpers\Url;
 use yii;
 
-class Product extends \yii\db\ActiveRecord
+class Product extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\CatalogProductInterface
 {
 	public static function tableName()
     {
@@ -13,6 +13,10 @@ class Product extends \yii\db\ActiveRecord
 
     public function getId(){
     	return $this->product_id;
+    }
+
+    public function getStatus(){
+        // ...
     }
 
     public function getUrl(){
