@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "max-commerce/shop-core": "dev-master"
+        "max-commerce/shop-core": "dev-master",
+        "kop/yii2-scroll-pager": "dev-master"
     },
     "autoload": {
         "psr-4": {
