@@ -38,7 +38,11 @@ class ProductController extends Controller
             throw new yii\web\NotFoundHttpException('Not found.');
         }
 
-        if (Yii::$app->request->url != $product->url) {
+        if (!$product->status) {
+            throw new yii\web\NotFoundHttpException('Not found.');
+        }
+
+        if ($product->hasAttribute('alias') && !empty($product->alias) && Yii::$app->request->url != $product->url) {
             return $this->redirect($product->url, 301);
         }
 
