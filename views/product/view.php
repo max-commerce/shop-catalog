@@ -52,8 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
 			    	<br>
 			    	<br>
 			    	<br>
-			    	<a class="btn btn-success btn-lg" style="font-size: 21px; padding: 14px 45px;">Добавить в корзину</a>
-			    	<a class="btn btn-warning btn-lg" style="font-size: 21px; padding: 14px 60px; margin-left: 8px;">Купить в 1 клик</a>
 			    	<br>
 
 				</div>
