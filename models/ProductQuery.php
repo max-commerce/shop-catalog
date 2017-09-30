@@ -53,6 +53,11 @@ class ProductQuery extends ActiveQuery
         // удаляем пустые значения
         $result = array_filter($result);
 
+        // приводим значения к int иначе имеем такое `category_id` IN (9, '50', '51', ...)
+        $result = array_map(function($el){
+            return (int)$el;
+        }, $result);
+
         $this->andWhere(['in', 'category_id', $result]);
         return $this;
     }
