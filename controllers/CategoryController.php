@@ -49,7 +49,7 @@ class CategoryController extends Controller
         }
 
     	$dataProvider = new ActiveDataProvider([
-		    'query' => $this->product->find()->active()->byCategoryWithChilds($category->id),
+		    'query' => $this->product->find()->byCategoryWithChilds($category->id),
 		    'pagination' => [
                 'pageSize' => 30,
 		        'defaultPageSize' => 30,

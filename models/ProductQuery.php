@@ -7,10 +7,10 @@ use yii;
 class ProductQuery extends ActiveQuery
 {
 
-	public function active()
+    public function init()
     {
+        parent::init();
         $this->andWhere(['status' => 1]);
-        return $this;
     }
 
     public function byCategory($category_id)
