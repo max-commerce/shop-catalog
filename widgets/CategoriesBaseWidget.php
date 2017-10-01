@@ -18,7 +18,7 @@ class CategoriesBaseWidget extends Widget
       $this->category = Yii::$app->category;
     }
 
-    $categories = $this->category->id ? $this->category->childs : $this->category->find()->active()->roots()->all();
+    $categories = $this->category->id ? $this->category->childs : $this->category->find()->roots()->all();
 
     foreach ($categories as $category) {
       $this->items[] = [

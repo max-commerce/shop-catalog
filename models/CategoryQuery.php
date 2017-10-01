@@ -10,12 +10,7 @@ class CategoryQuery extends ActiveQuery
     {
         parent::init();
         $this->orderBy('sort');
-    }
-
-	public function active()
-    {
         $this->andWhere(['status' => 1]);
-        return $this;
     }
 
 	public function roots()
