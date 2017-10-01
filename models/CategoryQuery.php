@@ -6,6 +6,12 @@ use yii\db\ActiveQuery;
 class CategoryQuery extends ActiveQuery
 {
 
+    public function init()
+    {
+        parent::init();
+        $this->orderBy('sort');
+    }
+
 	public function active()
     {
         $this->andWhere(['status' => 1]);
