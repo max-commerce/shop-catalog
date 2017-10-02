@@ -19,8 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 	    <div class="col-lg-6">
 	    	<div class="panel panel-default">
-		    	<img src="http://rio-music.ru/uploads/images/products/1490595213_10320474_800.jpg" class="img-responsive" />
-
+		    	<img src="https://dummyimage.com/650x520/ccc/fff" class="img-responsive" />
 			</div>
 		</div>
 		<div class="col-lg-6">
