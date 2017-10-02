@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-lg-9">
 
-            <?= maxcom\catalog\widgets\ProductsGridWidget::widget(['dataProvider' => $dataProvider]) ?>
+            <?= maxcom\catalog\widgets\ProductsListWidget::widget(['dataProvider' => $dataProvider]) ?>
 
             <?php if (trim(strip_tags($category->description))) : ?>
             <div class="panel panel-default">
