@@ -30,15 +30,16 @@ class ProductController extends Controller
             throw new yii\web\BadRequestHttpException('Bad Request.');
         }
 
+        // не используем findOne() т.к. надо получить сразу status = 1 для случая если есть например несколькотоваров с одним алиасом
+        // TODO еще изящнее добавить что-то типа defaultScope
         if (empty($product) && !empty($id)) {
-            $product = $this->product->findOne($id);
+            $product = $this->product->find->where([
+                'id' => $id,
+                'status' => 1
+            ]);
         }
 
         if (empty($product)) {
-            throw new yii\web\NotFoundHttpException('Not found.');
-        }
-
-        if (!$product->status) {
             throw new yii\web\NotFoundHttpException('Not found.');
         }
 
