@@ -19,6 +19,10 @@ class Product extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\Ca
         // ...
     }
 
+    public function getTitle(){
+        return $this->name;
+    }
+
     public function getUrl(){
     	return $this->alias ? Url::to(['/catalog/' . mb_strtolower($this->alias, 'utf-8')]) : Url::to(['/catalog/product', 'id' => $this->id]);
     }

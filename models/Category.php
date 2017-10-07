@@ -2,6 +2,7 @@
 
 namespace maxcom\catalog\models;
 use yii\helpers\Url;
+use yii;
 
 class Category extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\CatalogCategoryInterface
 {
@@ -13,6 +14,10 @@ class Category extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\C
 
     public function getId(){
     	return $this->category_id;
+    }
+
+    public function getTitle(){
+        return $this->name;
     }
 
     public function getStatus(){
@@ -34,12 +39,39 @@ class Category extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\C
 
     public function getChilds()
     {
-        return $this->hasMany(self::className(), ['parent_id' => 'category_id']);
+        if (Yii::$app->category->hasAttribute('category_id') && Yii::$app->category->hasAttribute('parent_id')) {
+            
+            // maxcommerce v.1 implementation
+            return $this->hasMany(self::className(), ['parent_id' => 'category_id']);
+
+        } else {
+
+            // maxcommerce v.2 implementation
+            $sql = "SELECT * FROM " . self::tableName() . " WHERE `lft` > :lft AND `rgt` < :rgt AND depth = :depth + 1";
+
+            $params = [':lft' => $this->lft, ':rgt' => $this->rgt, ':depth' => $this->depth];
+
+            return $this->findBySql($sql, $params)->all();
+        }
     }
 
     public function getParent()
     {
-        return $this->hasOne(self::className(), ['category_id' => 'parent_id']);
+        if (Yii::$app->category->hasAttribute('category_id') && Yii::$app->category->hasAttribute('parent_id')) {
+            
+            // maxcommerce v.1 implementation
+            return $this->hasOne(self::className(), ['category_id' => 'parent_id']);
+
+        } else {
+
+            // maxcommerce v.2 implementation
+            $sql = "SELECT * FROM " . self::tableName() . " WHERE `lft` > :id AND `rgt` < :id AND depth = :depth - 1";
+
+            $params = [':id' => $this->id, ':depth' => $this->depth];
+
+            return $this->findBySql($sql, $params)->one();
+
+        }
     }
 
     public static function find(){
