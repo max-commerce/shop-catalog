@@ -35,6 +35,10 @@ class Product extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\Ca
     	return $this->category_id ? Yii::$app->category->findOne($this->category_id) : null;
     }
 
+    public function getBrand(){
+        return $this->hasOne(Brand::className(), ['id' => 'brand_id']);
+    }
+
     public static function find(){
     	return new ProductQuery(get_called_class());
     }
