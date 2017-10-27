@@ -33,10 +33,10 @@ class ProductController extends Controller
         // не используем findOne() т.к. надо получить сразу status = 1 для случая если есть например несколькотоваров с одним алиасом
         // TODO еще изящнее добавить что-то типа defaultScope
         if (empty($product) && !empty($id)) {
-            $product = $this->product->find->where([
-                'id' => $id,
+            $product = $this->product->find()->where([
+                $this->product->hasAttribute('id') ? 'id' : 'product_id' => $id,
                 'status' => 1
-            ]);
+            ])->one();
         }
 
         if (empty($product)) {
