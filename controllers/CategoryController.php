@@ -49,7 +49,7 @@ class CategoryController extends Controller
         }
 
     	$dataProvider = new ActiveDataProvider([
-		    'query' => $this->product->find()->byCategoryWithChilds($category->id),
+		    'query' => $this->product->find()->byCategoryWithChilds($category->id)->withFilter(Yii::$app->request->get()),
 		    'pagination' => [
                 'pageSize' => 30,
 		        'defaultPageSize' => 30,

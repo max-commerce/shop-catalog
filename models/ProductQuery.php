@@ -19,6 +19,14 @@ class ProductQuery extends ActiveQuery
         return $this;
     }
 
+    public function withFilter($filter)
+    {
+        if (!empty($filter['brands'])) {
+            $this->andWhere(['brand_id' => $filter['brands']]);
+        }
+        return $this;
+    }
+
     public function byCategoryWithChilds($category_id)
     {
         
