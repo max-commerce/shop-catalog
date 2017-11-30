@@ -1,6 +1,6 @@
 <div class="products-filter">
     <div class="panel panel-default">
-        <form mehtod="get">        
+        <form mehtod="get" class="products-filter-form">        
             <?php maxcom\catalog\widgets\CategoriesMenuWidget::begin(['category' => $category]) ?>
             <div class="panel-heading">
                 Категории
@@ -27,6 +27,12 @@
                     <span class="pull-right">1000</span>
                 </div>
             </div>
+            <div class="panel-heading">
+                Спецпредложения
+            </div>
+            <div class="panel-body">
+                <label><input type="checkbox" name="popular" value="1" <?php if (Yii::$app->request->get('popular')) { ?>checked<?php } ?>/> Популярные</label>
+            </div>
             <?php if ($brands) { ?>
             <div class="panel-heading">
                 Бренд
@@ -34,7 +40,7 @@
             <div class="panel-body">
                 <ul style="list-style: none; padding: 0;">
                 <?php foreach ($brands as $brand) { ?>
-                    <li><label><input type="checkbox" name="brands[]" value="<?= $brand->id ?>" <?= in_array($brand->id, $brands_checked) ? 'checked' : '' ?>/> <?= $brand->title ?></label></li>
+                    <li><label><input type="checkbox" name="brand_id[]" value="<?= $brand->id ?>" <?= in_array($brand->id, $brands_checked) ? 'checked' : '' ?>/> <?= $brand->title ?></label></li>
                 <?php } ?>
                 </ul>
             </div>
@@ -42,8 +48,8 @@
 
             <?php $this->registerJs("
                 $(document).ready(function(){
-                    $(':checkbox[name=\"brands[]\"]').change(function(){
-                        $(this).closest('form').submit();
+                    $('.products-filter-form :checkbox').change(function(){
+                        $('.products-filter-form').submit();
                     });
                 });",
             \yii\web\View::POS_READY); ?>

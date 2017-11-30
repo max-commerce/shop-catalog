@@ -21,9 +21,9 @@ class ProductQuery extends ActiveQuery
 
     public function withFilter($filter)
     {
-        if (!empty($filter['brands'])) {
-            $this->andWhere(['brand_id' => $filter['brands']]);
-        }
+        unset($filter['category']);
+        unset($filter['price']);
+        $this->andWhere($filter);
         return $this;
     }
 
