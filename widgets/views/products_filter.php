@@ -1,6 +1,12 @@
 <div class="products-filter">
     <div class="panel panel-default">
-        <form mehtod="get" class="products-filter-form">        
+        <form mehtod="get" class="products-filter-form">
+            
+            <?php if (Yii::$app->request->get('id')) {
+                // фикс для случая когда URL категории не ЧПУ
+                echo \yii\helpers\Html::hiddenInput('id', Yii::$app->request->get('id'));
+            } ?>
+
             <?php maxcom\catalog\widgets\CategoriesMenuWidget::begin(['category' => $category]) ?>
             <div class="panel-heading">
                 Категории
