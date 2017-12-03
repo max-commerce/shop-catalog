@@ -27,7 +27,7 @@ use yii\helpers\Url;
                     <div class="col-item">
                         <a href="<?= Url::to($product->url) ?>">
                             <div class="photo">
-                                <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
+                                <img src="<?= $product->getMainImageUrl() ?>" class="img-responsive" alt="" />
                             </div>
                         </a>
                         <div class="info">
