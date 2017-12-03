@@ -23,6 +23,7 @@ class ProductQuery extends ActiveQuery
     {
         unset($filter['category']);
         unset($filter['price']);
+        unset($filter['id']);
         $this->andWhere($filter);
         return $this;
     }
