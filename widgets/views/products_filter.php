@@ -39,6 +39,7 @@
             <div class="panel-body">
                 <label><input type="checkbox" name="popular" value="1" <?php if (Yii::$app->request->get('popular')) { ?>checked<?php } ?>/> Популярные</label>
             </div>
+
             <?php if ($brands) { ?>
             <div class="panel-heading">
                 Бренд
@@ -50,6 +51,33 @@
                 <?php } ?>
                 </ul>
             </div>
+            <?php } ?>
+
+            <?php if ($types) { ?>
+            <div class="panel-heading">
+                Тип товара
+            </div>
+            <div class="panel-body">
+                <ul style="list-style: none; padding: 0;">
+                <?php foreach ($types as $type) { ?>
+                    <li><label><input type="checkbox" name="product_type_id[]" value="<?= $type->id ?>" <?= in_array($type->id, $types_checked) ? 'checked' : '' ?>/> <?= $type->name ?></label></li>
+                <?php } ?>
+                </ul>
+            </div>
+            <?php foreach ($types as $type) { ?>
+                <?php foreach ($type->eavAttributes as $attribute) { ?>
+                <div class="panel-heading">
+                    <?= $attribute->name ?>
+                </div>
+                <div class="panel-body">
+                    <ul style="list-style: none; padding: 0;">
+                    <?php foreach ($attribute->values as $value) { ?>
+                        <li><label><input type="checkbox" name="attribute[<?= $attribute->id ?>]" value=""/> <?= $value ?></label></li>
+                    <?php } ?>
+                    </ul>
+                </div>
+                <?php } ?>
+            <?php } ?>
             <?php } ?>
 
             <?php $this->registerJs("

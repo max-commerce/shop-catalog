@@ -16,6 +16,8 @@ class ProductsFilterWidget extends Widget
             'category' => $this->category,
             'brands' => \maxcom\catalog\models\Brand::find()->byCategory($this->category)->all(),
             'brands_checked' => Yii::$app->request->get('brand_id') ? array_values(Yii::$app->request->get('brand_id')) : [],
+            'types' => \maxcom\catalog\models\ProductType::find()->byCategory($this->category)->all(),
+            'types_checked' => Yii::$app->request->get('product_type_id') ? array_values(Yii::$app->request->get('product_type_id')) : [],
         ]);
 
     }
