@@ -12,7 +12,7 @@ class Product extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\Ca
     }
 
     public function getId(){
-    	return $this->product_id;
+    	return $this->primaryKey;
     }
 
     public function getStatus(){
@@ -32,7 +32,7 @@ class Product extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\Ca
     }
 
     public function getCategory(){
-    	return $this->category_id ? Yii::$app->category->findOne($this->category_id) : null;
+        return $this->hasOne(Yii::$app->category->className(), ['category_id' => 'category_id']);
     }
 
     public function getBrand(){
