@@ -2,6 +2,7 @@
 
 namespace maxcom\catalog\models;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 use yii;
 
 class Category extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\CatalogCategoryInterface
@@ -72,6 +73,13 @@ class Category extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\C
             return $this->findBySql($sql, $params)->one();
 
         }
+    }
+
+    /**
+    *   Return array id=>title of all models
+    */
+    public function listAll(){
+        return ArrayHelper::map(self::find()->all(), 'category_id', 'title');
     }
 
     public static function find(){
