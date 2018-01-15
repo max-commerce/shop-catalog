@@ -6,6 +6,11 @@ use yii;
 
 class Product extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\CatalogProductInterface
 {
+    /**
+    *
+    */
+    const EVENT_VIEWED = 'viewed';
+
 	public static function tableName()
     {
         return 'shop_products';

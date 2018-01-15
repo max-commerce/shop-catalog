@@ -47,6 +47,8 @@ class ProductController extends Controller
             return $this->redirect($product->url, 301);
         }
 
+        $product->trigger($product::EVENT_VIEWED);
+
         return $this->render('view', [
         	'product' => $product
         ]);
