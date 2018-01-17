@@ -44,6 +44,13 @@ class Product extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\Ca
         return $this->hasOne(Brand::className(), ['id' => 'brand_id']);
     }
 
+    public function getSimilarProducts($limit = null){
+        return Product::find()
+                ->where(['=', 'category_id', $this->category_id])
+                ->andWhere(['!=', 'product_id', $this->id])
+                ->limit($limit);
+    }
+
     public static function find(){
     	return new ProductQuery(get_called_class());
     }
