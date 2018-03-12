@@ -19,6 +19,14 @@ class CategoryQuery extends ActiveQuery
         $this->andWhere(['status' => 1]);
     }
 
+    /**
+    *   Возвращает "популярные" категории
+    */
+    public function featured()
+    {
+        return $this->roots();
+    }
+
 	public function roots()
     {
         // maxcommerce v.1 implementation
