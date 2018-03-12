@@ -3,12 +3,12 @@
 namespace maxcom\catalog\components;
 
 use yii\web\UrlRuleInterface;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii;
 
-class CatalogUrlRule extends Object implements UrlRuleInterface
+class CatalogUrlRule extends BaseObject implements UrlRuleInterface
 {
 
     public $product;

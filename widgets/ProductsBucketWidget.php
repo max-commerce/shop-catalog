@@ -64,7 +64,7 @@ class ProductsBucketWidget extends Widget
     */
     public function run()
     {
-    	if ($this->dataProvider->totalCount) {
+    	if ($this->dataProvider->getModels() && $this->dataProvider->totalCount) {
 	    	if ($this->title) {
 	    		$title = Html::tag('div', $this->title, $this->titleOptions);
 	    	} else {
