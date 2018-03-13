@@ -1,6 +1,7 @@
 <?php
 
 namespace maxcom\catalog\models;
+
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 use yii;
@@ -27,6 +28,14 @@ class BrandQuery extends ActiveQuery
         $params = [':category_id' => $category->id];
         $brand_ids = Yii::$app->db->createCommand($query, $params)->queryColumn();
         $this->andWhere(['id' => $brand_ids]);
+        return $this;
+    }
+
+    /**
+    *   Возвращает "популярные" бренды
+    */
+    public function featured()
+    {
         return $this;
     }
 }
