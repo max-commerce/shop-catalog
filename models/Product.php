@@ -37,7 +37,7 @@ class Product extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\Ca
     }
 
     public function getCategory(){
-        return $this->hasOne(Yii::$app->category->className(), ['category_id' => 'category_id']);
+        return $this->hasOne(Yii::$app->shop_categories->className(), ['category_id' => 'category_id']);
     }
 
     public function getBrand(){
