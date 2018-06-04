@@ -12,7 +12,8 @@ class CategoryQuery extends \yii\db\ActiveQuery
     public function init()
     {
         parent::init();
-        if (Yii::$app->shop_categories->hasAttribute('sort')) {
+        $modelClass = $this->modelClass;
+        if (array_key_exists('sort', $modelClass::getTableSchema()->columns)) {
             // maxcommerce v.1 implementation
             $this->orderBy('sort');
         }
@@ -36,10 +37,11 @@ class CategoryQuery extends \yii\db\ActiveQuery
      */
 	public function roots()
     {
-        if (Yii::$app->shop_categories->hasAttribute('parent_id')) {
+        $modelClass = $this->modelClass;
+        if (array_key_exists('parent_id', $modelClass::getTableSchema()->columns)) {
             // maxcommerce v.1 implementation
             $this->andWhere(['or', ['parent_id' => null], ['parent_id' => 0]]);
-        } elseif (Yii::$app->shop_categories->hasAttribute('depth')) {
+        } elseif (array_key_exists('depth', $modelClass::getTableSchema()->columns)) {
             // nested sets implementation
             $this->andWhere(['depth' => 1]);
         }
