@@ -1,24 +1,24 @@
 # shop-catalog
 
-## Категории товаров
+## Общая конфигурация
 
-Работа с категориями осуществляется через глобальный компонент `Yii::$app->shop_categories`, который необходимо предварительно сконфигурировать в `main.php`:
+Базовая конфигурация компонента Shop в `main.php`:
 ```
 'components' => [
     ..
-    'shop_categories' => [
-        'class' => 'maxcom\catalog\models\Category',
+    'shop' => [
+        'class' => 'maxcom\catalog\ShopComponent',
     ],
     ..
 ]
 ```
 
-Вариант конфигурации с дополнительными событиями (в примере ниже на событие afterFind модели Category добавляется поведение ImageByIdBehavior):
+Вариант конфигурации компонента Shop с дополнительными событиями (в примере ниже на событие afterFind модели Category добавляется поведение ImageByIdBehavior):
 ```
 'components' => [
     ..
-    'shop_categories' => [
-        'class' => 'maxcom\catalog\models\Category',
+    'shop' => [
+        'class' => 'maxcom\catalog\ShopComponent',
         'on init' => function($event){
             Event::on('maxcom\catalog\models\Category', 'afterFind', function ($e) {
                 $e->sender->attachBehavior('image', [
@@ -32,10 +32,15 @@
 ]
 ```
 
+
+## Категории товаров
+
+Работа с категориями осуществляется через глобальный компонент `Yii::$app->shop->categories`.
+
 **#1 Вывод меню категорий верхнего уровня:**
 ```
 <ul>
-  <?php foreach (Yii::$app->shop_categories->find()->roots()->all() as $category): ?>
+  <?php foreach (Yii::$app->shop->categories->find()->roots()->limit(99)->all() as $category): ?>
     <li><a href="<?= $category->url ?>"><?= Html::encode($category->title) ?></a></li>
   <?php endforeach; ?>
 </ul>
@@ -44,7 +49,7 @@
 **#2 Вывод двухуровневого меню категорий:**
 ```
 <ul>
-  <?php foreach (Yii::$app->shop_categories->find()->roots()->all() as $category): ?>
+  <?php foreach (Yii::$app->shop->categories->find()->roots()->all() as $category): ?>
   <li<?php if ($category->hasChilds()): ?> class="expandable"<?php endif; ?>>
     <a href="<?= $category->url ?>"><?= Html::encode($category->title) ?></a>
     <?php if ($category->hasChilds()): ?>
@@ -62,7 +67,7 @@
 **#3 Вывод двухуровневого меню категорий с картинкой (поведение ImageByIdBehavior):**
 ```
 <ul>
-    <?php foreach (Yii::$app->shop_categories->find()->roots()->all() as $category): ?>
+    <?php foreach (Yii::$app->shop->categories->find()->roots()->all() as $category): ?>
     <li<?php if ($category->hasChilds()): ?> class="expandable"<?php endif; ?>>
         <a href="<?= $category->url ?>">
             <?= $category->imageUrl ? "<img src=\"" . $category->imageUrl . "\" />" : '' ?><?= Html::encode($category->title) ?>
