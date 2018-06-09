@@ -16,46 +16,56 @@ class Product extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\Ca
         return 'shop_products';
     }
 
-    public function getId(){
+    public function getId()
+    {
     	return $this->primaryKey;
     }
 
-    public function getStatus(){
+    public function getStatus()
+    {
         // ...
     }
 
-    public function getTitle(){
+    public function getTitle()
+    {
         return $this->name;
     }
 
-    public function getUrl(){
+    public function getUrl()
+    {
     	return $this->alias ? Url::to(['/catalog/' . mb_strtolower($this->alias, 'utf-8')]) : Url::to(['/catalog/product', 'id' => $this->id]);
     }
 
-    public function getAlias(){
+    public function getAlias()
+    {
         return null;
     }
 
-    public function getCategory(){
+    public function getCategory()
+    {
         return $this->hasOne(Yii::$app->shop_categories->className(), ['category_id' => 'category_id']);
     }
 
-    public function getBrand(){
+    public function getBrand()
+    {
         return $this->hasOne(Brand::className(), ['id' => 'brand_id']);
     }
 
-    public function getSimilarProducts($limit = null){
+    public function getSimilarProducts($limit = null)
+    {
         return Product::find()
                 ->where(['=', 'category_id', $this->category_id])
                 ->andWhere(['!=', 'product_id', $this->id])
                 ->limit($limit);
     }
 
-    public static function find(){
+    public static function find()
+    {
     	return new ProductQuery(get_called_class());
     }
 
-    public function attributeLabels(){
+    public function attributeLabels()
+    {
     	return [
     		'price' => 'Цена',
     		'title' => 'Наименование'
