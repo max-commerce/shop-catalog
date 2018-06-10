@@ -22,11 +22,10 @@ class ImageBehavior extends \yii\base\Behavior
         $fullPath  = $this->imagePath . '/' . $this->owner->image;
         $fullPathWatemark = $this->imagePath . '/pub/' . $this->owner->image;
 
-        if (!file_exists($fullPath))
+        if (!file_exists($fullPath) || is_dir($fullPath) || !is_readable($fullPath))
             return false;
         
-        if($size !== false)
-        {
+        if ($size !== false) {
             $thumbPath = 'assets/thumbs/' . $size;
             if (!file_exists($thumbPath))
                 mkdir($thumbPath, 0777, true);
@@ -36,9 +35,8 @@ class ImageBehavior extends \yii\base\Behavior
 
             if (!file_exists($thumbPath)) {
                 // Resize if needed
-                Yii::import('ext.phpthumb.PhpThumbFactory');
                 $sizes  = explode('x', $size);
-                $thumb  = PhpThumbFactory::create($fullPath);
+                $thumb  = \maxcom\phpthumb\PhpThumbFactory::create($fullPath);
 
                 if($resizeMethod === false)
                     $resizeMethod = 'resize';
@@ -53,9 +51,8 @@ class ImageBehavior extends \yii\base\Behavior
         } else {
             if (!file_exists($fullPathWatemark)) {
                 // Watermark if needed
-                Yii::import('ext.phpthumb.PhpThumbFactory');
-                $pic  = PhpThumbFactory::create($fullPath);
-                $watermark = PhpThumbFactory::create(Yii::app()->params['watermark']);
+                $pic  = \maxcom\phpthumb\PhpThumbFactory::create($fullPath);
+                $watermark = \maxcom\phpthumb\PhpThumbFactory::create(Yii::app()->params['watermark']);
                 $pic->addWatermark($watermark, 'centerCenter', 60, 0, 0);
                 $pic->save($fullPathWatemark);
             }
