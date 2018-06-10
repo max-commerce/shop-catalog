@@ -66,4 +66,13 @@ class ImageBehavior extends \yii\base\Behavior
             }
         }
     }
+
+    /**
+     * Returns array of additional images for product.
+     * @return array
+     */
+    public function getImages()
+    {
+        return [];
+    }
 }
