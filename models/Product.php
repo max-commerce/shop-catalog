@@ -13,7 +13,7 @@ class Product extends \yii\db\ActiveRecord implements \maxcom\core\interfaces\Ca
 
 	public static function tableName()
     {
-        return 'shop_products';
+        return '{{%products}}';
     }
 
     public function getId()
