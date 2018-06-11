@@ -1,10 +1,9 @@
 <?php
 
 namespace maxcom\catalog\models;
-use yii\db\ActiveQuery;
-use yii;
+use Yii;
 
-class ProductQuery extends ActiveQuery
+class ProductQuery extends \yii\db\ActiveQuery
 {
 
     public function init()
