@@ -9,6 +9,13 @@ class ImageBehavior extends \yii\base\Behavior
 
     public $imagePath = 'uploads';
 
+    public $imageAttribute = 'image';
+
+    public function getRawImageUrl()
+    {
+        return $this->imagePath . '/' . $this->owner->{$this->imageAttribute};
+    }
+
     /**
      * Get url to product image. Enter $size to resize image.
      * @param mixed $size New size of the image. e.g. '150x150'
@@ -19,8 +26,8 @@ class ImageBehavior extends \yii\base\Behavior
     public function getMainImageUrl($size = false, $resizeMethod = false, $random = false)
     {
         // Path to source image
-        $fullPath  = $this->imagePath . '/' . $this->owner->image;
-        $fullPathWatemark = $this->imagePath . '/pub/' . $this->owner->image;
+        $fullPath  = $this->imagePath . '/' . $this->owner->{$this->imageAttribute};
+        $fullPathWatemark = $this->imagePath . '/pub/' . $this->owner->{$this->imageAttribute};
 
         if (!file_exists($fullPath) || is_dir($fullPath) || !is_readable($fullPath))
             return false;
@@ -31,7 +38,7 @@ class ImageBehavior extends \yii\base\Behavior
                 mkdir($thumbPath, 0777, true);
             
             // Path to thumb
-            $thumbPath = $thumbPath . '/' . $this->owner->image;
+            $thumbPath = $thumbPath . '/' . $this->owner->{$this->imageAttribute};
 
             if (!file_exists($thumbPath)) {
                 // Resize if needed
