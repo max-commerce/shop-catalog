@@ -15,6 +15,8 @@ class ShopComponent extends \yii\base\Component
 
     public $brands;
 
+    public $cart;
+
     /**
      * @inheritdoc
      */
@@ -30,6 +32,9 @@ class ShopComponent extends \yii\base\Component
         ]);
         $this->brands = \Yii::createObject([
             'class' => 'maxcom\catalog\models\Brand'
+        ]);
+        $this->cart = \Yii::createObject([
+            'class' => 'maxcom\catalog\components\Cart'
         ]);
 
         \Yii::$app->urlManager->rules[] = \Yii::createObject([
