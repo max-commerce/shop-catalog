@@ -13,9 +13,11 @@ class Cart extends \yii\base\Component
     public static function getTotal()
     {
         $total = 0;
-        foreach (self::getItems() as $item) {
-            if ($product = Yii::$app->shop->products->findOne($item['product_id'])) {
-                $total += $item['amount'] * $product->price;
+        if ($items = self::getItems()) {
+            foreach ($items as $item) {
+                if ($product = Yii::$app->shop->products->findOne($item['product_id'])) {
+                    $total += $item['amount'] * $product->price;
+                }
             }
         }
         return $total;
@@ -24,9 +26,11 @@ class Cart extends \yii\base\Component
     public static function getItemsCount()
     {
         $count = 0;
-        foreach (self::getItems() as $item) {
-            if ($product = Yii::$app->shop->products->findOne($item['product_id'])) {
-                $count += $item['amount'];
+        if ($items = self::getItems()) {
+            foreach ($items as $item) {
+                if ($product = Yii::$app->shop->products->findOne($item['product_id'])) {
+                    $count += $item['amount'];
+                }
             }
         }
         return $count;
