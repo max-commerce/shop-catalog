@@ -1,5 +1,3 @@
-# shop-catalog
-
 ## Добавить в проект через Composer
 
 ```
