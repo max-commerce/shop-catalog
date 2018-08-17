@@ -1,5 +1,13 @@
 # shop-catalog
 
+## Добавить в проект через Composer
+
+```
+    "require": {
+        "max-commerce/shop-catalog": "dev-master"
+    }
+```
+
 ## Общая конфигурация
 
 Базовая конфигурация компонента Shop в `main.php`:
