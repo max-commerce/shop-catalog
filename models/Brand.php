@@ -14,7 +14,7 @@ class Brand extends \yii\db\ActiveRecord
 
     public function getUrl(){
         
-        $urlParams = ['/catalog/brand'];
+        $urlParams = ['/shop/products/brand'];
 
         if ($this->hasAttribute('alias') && !empty($this->alias)) {
             $urlParams['alias'] = mb_strtolower($this->alias, 'utf-8');
