@@ -27,7 +27,7 @@ class CategoryQuery extends \yii\db\ActiveQuery
      */
     public function featured()
     {
-        return $this->roots();
+        return $this->andWhere(['popular' => 1]);
     }
 
     /**
