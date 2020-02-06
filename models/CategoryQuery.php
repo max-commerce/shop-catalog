@@ -21,6 +21,16 @@ class CategoryQuery extends \yii\db\ActiveQuery
     }
 
     /**
+     *  Только категории с флагом "показать в меню"
+     *
+     *  @return yii\db\ActiveQuery
+     */
+    public function inMenu()
+    {
+        return $this->andWhere(['in_menu' => 1]);
+    }
+
+    /**
      *  Метод возвращает ActiveQuery популярных категорий
      *
      *  @return yii\db\ActiveQuery
